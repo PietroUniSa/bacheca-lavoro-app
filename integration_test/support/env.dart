@@ -35,7 +35,7 @@ class RecordingCvOpener implements CvOpener {
 
 class TestEnv {
   TestEnv({String? initialToken})
-    : tokenStore = InMemoryTokenStore(initialToken) {
+      : tokenStore = InMemoryTokenStore(initialToken) {
     if (apiBaseUrl.isEmpty) {
       throw StateError('Manca --dart-define=API_BASE_URL=http://<host>:8080');
     }
@@ -54,11 +54,11 @@ class TestEnv {
   String get jobTitle => 'Sviluppatore Flutter Junior #$stamp';
 
   AppDeps get deps => AppDeps(
-    apiBaseUrl: apiBaseUrl,
-    tokenStore: tokenStore,
-    cvPicker: picker,
-    cvOpener: opener,
-  );
+        apiBaseUrl: apiBaseUrl,
+        tokenStore: tokenStore,
+        cvPicker: picker,
+        cvOpener: opener,
+      );
 }
 
 /// Le chiamate HTTP reali non generano frame: pumpAndSettle può tornare prima
