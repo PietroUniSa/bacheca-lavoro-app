@@ -1,0 +1,28 @@
+name: CI app
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Formattazione
+        run: dart format --output=none --set-exit-if-changed lib test integration_test
+      - name: Analisi statica
+        run: flutter analyze
+      - name: Unit e widget test
+        run: flutter test
+      - name: Limite 200 righe per file (constitution C4)
+        run: |
+          bad=$(find lib test integration_test -name '*.dart' -exec awk 'END { if (NR > 200) print FILENAME ": " NR }' {} \;)
+          if [ -n "$bad" ]; then echo "$bad"; exit 1; fi
+# Gli integration test S1–S3 richiedono un device e il back-end: si eseguono in
+# locale (vedi CLAUDE.md) e sono documentati dai video della consegna.
