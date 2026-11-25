@@ -5,6 +5,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ^3.5.0
+  flutter: ">=3.47.7 <3.48.0"
 
 # Dipendenze ammesse: specs/05-architecture.md. Questo file va creato PRIMA di
 # `flutter create .`, che non lo sovrascrive. Poi: `flutter pub get`.
